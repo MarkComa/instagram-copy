@@ -8,7 +8,7 @@ const WriteComment = (props) => {
 
   const id = props.id;
   const onSubmit = (value) => {
-    props.sendMessageComment(id, value.newMessageComment);
+    props.sendMessageComment({id: id, newMessageComment: value.newMessageComment});
   };
   if (props.isEmoji) {
     setIsEmoji(props.isEmoji);

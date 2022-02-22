@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import BlockAction from "../blockAction/BlockAction";
 import WriteComment from "../writeComment/WriteComment";
 import s from "./card.module.css";
@@ -6,41 +6,39 @@ import { NavLink } from "react-router-dom";
 import { Modal } from "../../modals/Modal";
 import { ModalCard } from "./ModalCard";
 import { useDispatch } from "react-redux";
-import { sendMessageComment } from "../../../redux/redusers/postsCardReducer";
+import {sendMessageComment} from "../../../redux/reducers/postsCardSlice"
 
 const Card = (props) => {
+  
   const [isModal, setModal] = useState(false);
-  const [isContent, setContent] = useState();
+  //const [content, setContent] = useState();
   const [isTitle, setTitle] = useState();
   const [isHeader, setHeader] = useState(false);
   const onClose = () => setModal(false);
   const dispatch = useDispatch();
+  useEffect(() => {
+    console.log("useEffect has been run" + nickName);
+  });
+  
 
-  const sendComment = (id, newMessageComment) =>
-    dispatch(sendMessageComment(id, newMessageComment));
+  const sendComment = ({id: id, newMessageComment: newMessageComment}) =>{
+    dispatch(sendMessageComment({id: id, newMessageComment: newMessageComment}))};
+
+
   const nickName = props.nickName || "NoName";
   const id = props.id;
-
-  const commentEl = props.comments.map((el) => {
-    return (
-      <div className={s.comment}>
-        <span className={s.commentator}>{el.nickname}</span>
-        <span className={s.message}>{el.message}</span>
-      </div>
-    );
-  });
+  
+  const content = <ModalCard
+  sendMessageComment={sendComment}
+  id={id}
+  comments={props.comments}
+  nickName={nickName}
+  img={props.img}
+/>
+  
 
   const onCard = () => {
     setTitle("");
-    setContent(
-      <ModalCard
-        sendMessageComment={sendComment}
-        id={id}
-        commentEl={commentEl}
-        nickName={nickName}
-        img={props.img}
-      />
-    );
     setModal(true);
     setHeader(false);
   };
@@ -69,7 +67,7 @@ const Card = (props) => {
       <Modal
         visible={isModal}
         title={isTitle}
-        content={isContent}
+        content={content}
         onClose={onClose}
         isHeader={isHeader}
       />

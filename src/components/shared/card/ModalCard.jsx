@@ -5,6 +5,15 @@ import { NavLink } from "react-router-dom";
 import s from "./modalCard.module.css";
 
 export const ModalCard = (props) => {
+  const commentEl = props.comments.map((el) => {
+    return (
+      <div className={s.comment} key={el.id}>
+        <span className={s.commentator}>{el.nickname}</span>
+        <span className={s.message}>{el.message}</span>
+      </div>
+    );
+  });
+
   return (
     <div className={s.modalCard}>
       <div className={s.photos}>
@@ -18,7 +27,7 @@ export const ModalCard = (props) => {
             <span className={s.kebabMenu}></span>
           </button>
         </div>
-        <div>{props.commentEl}</div>
+        <div>{commentEl}</div>
         <div className={s.footer}>
           <BlockAction />
           <WriteComment

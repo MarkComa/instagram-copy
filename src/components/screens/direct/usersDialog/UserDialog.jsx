@@ -21,7 +21,7 @@ export const UserDialog = (props) => {
   });
 
   const onSubmit = (value) => {
-    props.sendMessageClick(id, value.newMessageText);
+    props.sendMessageClick({id: id, newMessageText: value.newMessageText});
   };
 
   return (

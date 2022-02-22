@@ -4,10 +4,10 @@ import { useParams } from "react-router-dom";
 import { UsersDialogsList } from "./usersDialog/UsersDialogsList";
 import { UserDialog } from "./usersDialog/UserDialog";
 import s from "./direct.module.css";
-import { sendMessageClick } from "../../../redux/redusers/directReducer";
+import { sendMessageClick } from "../../../redux/reducers/directSlice";
 
 export const Direct = () => {
-  const users = useSelector((state) => state.directReducer.users);
+  const users = useSelector((state) => state.direct.users);
   const paramsUserId = useParams();
   const dispatch = useDispatch();
   let userId = paramsUserId.id;
@@ -15,8 +15,8 @@ export const Direct = () => {
     userId = "";
   }
 
-  const sendMessage = (id, newMessageText) =>
-    dispatch(sendMessageClick(id, newMessageText));
+  const sendMessage = ({id: id,newMessageText: newMessageText}) =>
+    dispatch(sendMessageClick({id: id,newMessageText: newMessageText}));
 
   const user = users.filter((i) => {
     return i.id === userId;

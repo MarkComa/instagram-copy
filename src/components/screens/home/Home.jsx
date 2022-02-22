@@ -1,11 +1,15 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useSelector } from "react-redux";
 import Card from "../../shared/card/Card";
 import Footer from "../../footer/Footer";
 import s from "./home.module.css";
 
 const Home = () => {
+  
   const card = useSelector((state) => state.postsCard.card);
+  useEffect(() => {
+    console.log("useEffect has been run home");
+  });
 
   const footerStyle = {
     footer: s.footer,
@@ -16,7 +20,7 @@ const Home = () => {
     list: s.list,
     btn: s.btn,
   };
-
+  
   let cardEl = card.map((el) => {
     return (
       <div key={el.id}>
@@ -36,6 +40,7 @@ const Home = () => {
           <Footer {...footerStyle} />
         </div>
       </div>
+      
     </div>
   );
 };

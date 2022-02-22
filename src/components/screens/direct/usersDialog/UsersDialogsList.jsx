@@ -12,7 +12,7 @@ const UsersDialogsItem = (props) => {
 };
 
 export const UsersDialogsList = () => {
-  const users = useSelector((state) => state.directReducer.users);
+  const users = useSelector((state) => state.direct.users);
 
   return (
     <div>
