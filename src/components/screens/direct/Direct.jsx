@@ -15,8 +15,8 @@ export const Direct = () => {
     userId = "";
   }
 
-  const sendMessage = ({id: id,newMessageText: newMessageText}) =>
-    dispatch(sendMessageClick({id: id,newMessageText: newMessageText}));
+  const sendMessage = (id, newMessageText) =>
+    dispatch(sendMessageClick(id, newMessageText));
 
   const user = users.filter((i) => {
     return i.id === userId;

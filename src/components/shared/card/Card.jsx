@@ -19,10 +19,9 @@ const Card = (props) => {
   useEffect(() => {
     console.log("useEffect has been run" + nickName);
   });
-  
 
-  const sendComment = ({id: id, newMessageComment: newMessageComment}) =>{
-    dispatch(sendMessageComment({id: id, newMessageComment: newMessageComment}))};
+  const sendComment = (id, newMessageComment) =>{
+    dispatch(sendMessageComment(id, newMessageComment))};
 
 
   const nickName = props.nickName || "NoName";
